@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پارسا | وب‌سایت شخصی</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============ تنظیمات پایه ============ */
+        :root {
+            --bg-color: #050505;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-1: #8b5cf6; /* بنفش */
+            --accent-2: #ec4899; /* صورتی */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ============ افکت‌های پس‌زمینه (حباب‌های نئونی) ============ */
+        .blob {
+            position: absolute;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 10s infinite alternate ease-in-out;
+        }
+        .blob-1 { top: -10%; right: -10%; width: 400px; height: 400px; background: var(--accent-1); }
+        .blob-2 { bottom: -10%; left: -10%; width: 350px; height: 350px; background: var(--accent-2); animation-delay: -5s; }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-30px, 40px) scale(1.1); }
+        }
+
+        /* ============ هدر (ناوبری) ============ */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: 1px; }
+        .logo span { color: var(--accent-1); }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        nav a:hover { color: var(--accent-1); }
+
+        /* ============ بخش اصلی (Hero) ============ */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(139, 92, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .hero h1 span {
+            background: linear-gradient(to left, var(--accent-2), var(--accent-1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            min-height: 30px;
+        }
+        .typing-text { font-weight: 600; color: var(--text-main); }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(139, 92, 246, 0.5);
+        }
+
+        /* ============ بخش مهارت‌ها ============ */
+        .section {
+            padding: 100px 5%;
+            position: relative;
+            z-index: 10;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 60px;
+        }
+        .section-title span { color: var(--accent-1); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* کارت‌های شیشه‌ای */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: 0.4s;
+            text-align: center;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .glass-card i {
+            font-size: 40px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card h3 { font-size: 20px; margin-bottom: 10px; }
+        .glass-card p { color: var(--text-muted); font-size: 14px; }
+
+        /* ============ فوتر ============ */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .socials a {
+            color: var(--text-muted);
+            font-size: 20px;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .socials a:hover { color: var(--accent-1); transform: scale(1.2); }
+
+        /* انیمیشن ورود با اسکرول */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* موبایل */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            nav { display: none; } /* منوی موبایل ساده شده */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- حباب‌های نئونی پس‌زمینه -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <!-- هدر -->
+    <header>
+        <div class="logo">Parsa<span>.</span></div>
+        <nav>
+            <a href="#home">خانه</a>
+            <a href="#skills">مهارت‌ها</a>
+            <a href="#contact">ارتباط</a>
+        </nav>
+    </header>
+
+    <!-- بخش اصلی -->
+    <section class="hero" id="home">
+        <div class="hero-avatar">P</div>
+        <h1>سلام، من <span>پارسا</span> هستم</h1>
+        <p>من عاشق <span class="typing-text"></span><span class="cursor">|</span> هستم</p>
+        <a href="#skills" class="btn">بیشتر بشناس</a>
+    </section>
+
+    <!-- بخش مهارت‌ها -->
+    <section class="section reveal" id="skills">
+        <h2 class="section-title">توانایی‌های <span>من</span></h2>
+        <div class="grid">
+            <div class="glass-card">
+                <i class="fas fa-code"></i>
+                <h3>توسعه وب</h3>
+                <p>ساخت وب‌سایت‌های مدرن و واکنش‌گرا با استفاده از تکنولوژی‌های روز دنیا.</p>
+            </div>
+            <div class="glass-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>بازی‌سازی</h3>
+                <p>طراحی و ساخت بازی‌های مرورگری و آنلاین با گرافیک جذاب.</p>
+            </div>
+            <div class="glass-card">
+                <i class="fas fa-robot"></i>
+                <h3>ربات‌های تلگرام</h3>
+                <p>اتوماسیون و ساخت ربات‌های کاربردی برای تلگرام با پایتون و Node.js.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر / ارتباط -->
+    <footer id="contact">
+        <div class="socials" style="margin-bottom: 15px;">
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>ساخته شده با ❤️ توسط پارسا &copy; 2024</p>
+    </footer>
+
+    <!-- اسکریپت‌ها -->
+    <script>
+        // ============ افکت تایپ کردن ============
+        const textElement = document.querySelector('.typing-text');
+        const words = ["برنامه‌نویسی", "بازی‌سازی", "طراحی وب", "یادگیری چیزهای جدید"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                textElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 150;
+            if (isDeleting) typeSpeed /= 2;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; // مکث بعد از کامل شدن کلمه
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener("DOMContentLoaded", () => setTimeout(type, 1000));
+
+        // ============ انیمیشن اسکرول (Reveal) ============
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ============ افکت موس (اختیاری) ============
+        // اگر خواستی افکت خاصی به موس اضافه کنی اینجا میشه.
+    </script>
+</body>
+</html>
